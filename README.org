@@ -1,0 +1,21 @@
+#+TITLE: ST terminal customizations
+
+This is my [[https://st.suckless.org/][st]] configuration.
+
+* Customizations
+
+- [[https://github.com/dcat/st-xresources][Xresources]]
+
+* Requirements
+
+#+begin_src sh
+sudo apt-get install build-essential libfontconfig1-dev libfreetype-dev x11proto-dev libx11-dev libxft-dev
+#+end_src
+
+* Installation
+
+#+BEGIN_SRC sh
+  make
+  sudo cp st /usr/local/bin
+#+END_SRC
+
