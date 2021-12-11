@@ -59,10 +59,11 @@ typedef struct {
 	void *dst;
 } ResourcePref;
 
+
 /* X modifiers */
 #define XK_ANY_MOD    UINT_MAX
 #define XK_NO_MOD     0
-#define XK_SWITCH_MOD (1<<13|1<<14)
+#define XK_SWITCH_MOD (1<<13)
 
 /* function definitions used in config.h */
 static void clipcopy(const Arg *);
@@ -107,7 +108,7 @@ typedef struct {
 	Window win;
 	Drawable buf;
 	GlyphFontSpec *specbuf; /* font spec buffer used for rendering */
-	Atom xembed, wmdeletewin, netwmname, netwmiconname, netwmpid;
+	Atom xembed, wmdeletewin, netwmname, netwmpid;
 	struct {
 		XIM xim;
 		XIC xic;
@@ -170,7 +171,7 @@ static void xresize(int, int);
 static void xhints(void);
 static int xloadcolor(int, const char *, Color *);
 static int xloadfont(Font *, FcPattern *);
-static void xloadfonts(const char *, double);
+static void xloadfonts(char *, double);
 static void xunloadfont(Font *);
 static void xunloadfonts(void);
 static void xsetenv(void);
@@ -401,9 +402,7 @@ mousereport(XEvent *e)
 			button = 3;
 		} else {
 			button -= Button1;
-			if (button >= 7)
-				button += 128 - 7;
-			else if (button >= 3)
+			if (button >= 3)
 				button += 64 - 3;
 		}
 		if (e->xbutton.type == ButtonPress) {
@@ -966,7 +965,7 @@ xloadfont(Font *f, FcPattern *pattern)
 }
 
 void
-xloadfonts(const char *fontstr, double fontsize)
+xloadfonts(char *fontstr, double fontsize)
 {
 	FcPattern *pattern;
 	double fontval;
@@ -974,7 +973,7 @@ xloadfonts(const char *fontstr, double fontsize)
 	if (fontstr[0] == '-')
 		pattern = XftXlfdParse(fontstr, False, False);
 	else
-		pattern = FcNameParse((const FcChar8 *)fontstr);
+		pattern = FcNameParse((FcChar8 *)fontstr);
 
 	if (!pattern)
 		die("can't open font %s\n", fontstr);
@@ -1120,8 +1119,8 @@ xinit(int cols, int rows)
 	pid_t thispid = getpid();
 	XColor xmousefg, xmousebg;
 
-	/* if (!(xw.dpy = XOpenDisplay(NULL))) */
-	/* 	die("can't open display\n"); */
+	//if (!(xw.dpy = XOpenDisplay(NULL)))
+  //		die("can't open display\n");
 	xw.scr = XDefaultScreen(xw.dpy);
 	xw.vis = XDefaultVisual(xw.dpy, xw.scr);
 
@@ -1202,7 +1201,6 @@ xinit(int cols, int rows)
 	xw.xembed = XInternAtom(xw.dpy, "_XEMBED", False);
 	xw.wmdeletewin = XInternAtom(xw.dpy, "WM_DELETE_WINDOW", False);
 	xw.netwmname = XInternAtom(xw.dpy, "_NET_WM_NAME", False);
-	xw.netwmiconname = XInternAtom(xw.dpy, "_NET_WM_ICON_NAME", False);
 	XSetWMProtocols(xw.dpy, xw.win, &xw.wmdeletewin, 1);
 
 	xw.netwmpid = XInternAtom(xw.dpy, "_NET_WM_PID", False);
@@ -1597,28 +1595,13 @@ xsetenv(void)
 }
 
 void
-xseticontitle(char *p)
-{
-	XTextProperty prop;
-	DEFAULT(p, opt_title);
-
-	if (Xutf8TextListToTextProperty(xw.dpy, &p, 1, XUTF8StringStyle,
-	                                &prop) != Success)
-		return;
-	XSetWMIconName(xw.dpy, xw.win, &prop);
-	XSetTextProperty(xw.dpy, xw.win, &prop, xw.netwmiconname);
-	XFree(prop.value);
-}
-
-void
 xsettitle(char *p)
 {
 	XTextProperty prop;
 	DEFAULT(p, opt_title);
 
-	if (Xutf8TextListToTextProperty(xw.dpy, &p, 1, XUTF8StringStyle,
-	                                &prop) != Success)
-		return;
+	Xutf8TextListToTextProperty(xw.dpy, &p, 1, XUTF8StringStyle,
+			&prop);
 	XSetWMName(xw.dpy, xw.win, &prop);
 	XSetTextProperty(xw.dpy, xw.win, &prop, xw.netwmname);
 	XFree(prop.value);
@@ -2124,9 +2107,9 @@ run:
 	XSetLocaleModifiers("");
 
 	if(!(xw.dpy = XOpenDisplay(NULL)))
-		die("Can't open display\n");
+    die("Can't open display\n");
 
-	config_init();    
+  config_init();
 	cols = MAX(cols, 1);
 	rows = MAX(rows, 1);
 	tnew(cols, rows);
