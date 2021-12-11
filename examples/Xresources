@@ -1,4 +1,5 @@
 st.foreground:   #abb2bf
+st.termname: xterm-256color
 st.background:   #ff0000
 st.cursorColor:  #abb2bf
 st.opacity:      0.87 
