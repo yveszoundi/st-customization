@@ -5,8 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-static char *font2 = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -63,8 +62,6 @@ static double maxlatency = 33;
  */
 static unsigned int blinktimeout = 800;
 
-int ximspot_update_interval = 1000;
-
 /*
  * thickness of underline and bar cursors
  */
@@ -96,35 +93,35 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* bg opacity */
-float alpha = 1.0;
-
-/* Terminal colors (16 first used in escape sequence) */
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-  "#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
-  "#cc241d",
-  "#98971a",
-  "#d79921",
-  "#458588",
-  "#b16286",
-  "#689d6a",
-  "#a89984",
-  "#928374",
-  "#fb4934",
-  "#b8bb26",
-  "#fabd2f",
-  "#83a598",
-  "#d3869b",
-  "#8ec07c",
-  "#ebdbb2",
-  [255] = 0,
-  /* more colors can be added after 255 to use with DefaultXX */
-  "#add8e6", /* 256 -> cursor */
-  "#555555", /* 257 -> rev cursor*/
-  "#282828", /* 258 -> bg */
-  "#ffffff", /* 259 -> fg */
+	/* 8 normal colors */
+  "#282c34",
+  "#e06c75",
+  "#98c379",
+  "#e5c07b",
+  "#61afef",
+  "#c678dd",
+  "#56b6c2",
+  "#abb2bf",
+
+	/* 8 bright colors */
+  "#545862",
+  "#d19a66",
+  "#98c379",
+  "#d19a66",
+  "#56b6c2",
+  "#c678dd",
+  "#61afef",
+  "#c8ccd4",
+
+	[255] = 0,
+
+	/* more colors can be added after 255 to use with DefaultXX */
+	"#cccccc",
+	"#555555",
 };
+
 
 /*
  * Default colors (colorname index)
@@ -170,43 +167,6 @@ static unsigned int defaultattr = 11;
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = ShiftMask;
-
-/*
- * Xresources preferences to load at startup
- */
-ResourcePref resources[] = {
-  { "font",         STRING,  &font },
-  { "fontalt0",     STRING,  &font2 },
-  { "color0",       STRING,  &colorname[0] },
-  { "color1",       STRING,  &colorname[1] },
-  { "color2",       STRING,  &colorname[2] },
-  { "color3",       STRING,  &colorname[3] },
-  { "color4",       STRING,  &colorname[4] },
-  { "color5",       STRING,  &colorname[5] },
-  { "color6",       STRING,  &colorname[6] },
-  { "color7",       STRING,  &colorname[7] },
-  { "color8",       STRING,  &colorname[8] },
-  { "color9",       STRING,  &colorname[9] },
-  { "color10",      STRING,  &colorname[10] },
-  { "color11",      STRING,  &colorname[11] },
-  { "color12",      STRING,  &colorname[12] },
-  { "color13",      STRING,  &colorname[13] },
-  { "color14",      STRING,  &colorname[14] },
-  { "color15",      STRING,  &colorname[15] },
-  { "background",   STRING,  &colorname[258] },
-  { "foreground",   STRING,  &colorname[259] },
-  { "cursorColor",  STRING,  &colorname[256] },
-  { "termname",     STRING,  &termname },
-  { "shell",        STRING,  &shell },
-  { "blinktimeout", INTEGER, &blinktimeout },
-  { "bellvolume",   INTEGER, &bellvolume },
-  { "tabspaces",    INTEGER, &tabspaces },
-  { "borderpx",     INTEGER, &borderpx },
-  { "cwscale",      FLOAT,   &cwscale },
-  { "chscale",      FLOAT,   &chscale },
-  { "alpha",        FLOAT,   &alpha },
-  { "ximspot_update_interval", INTEGER, &ximspot_update_interval },
-};
 
 /*
  * Internal mouse shortcuts.

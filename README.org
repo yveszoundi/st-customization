@@ -4,11 +4,8 @@ This is my [[https://st.suckless.org/][st]] configuration.
 
 * Customizations
 
-|------------+--------------------------------------------------|
-| Patch      | Description                                      |
-|------------+--------------------------------------------------|
-| [[https://github.com/dcat/st-xresources][Xresources]] | Read settings such as colors from =.Xresources=. |
-|------------+--------------------------------------------------|
+- Font size increased
+- Additional =mk= file to allow building transparently on both Linux and BSD (OpenBSD and FreeBSD).
 
 * Requirements
 

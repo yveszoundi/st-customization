@@ -1,0 +1,2 @@
+X11INC = /usr/local/include
+X11LIB = /usr/local/lib
