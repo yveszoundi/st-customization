@@ -5,7 +5,7 @@ This is my [[https://st.suckless.org/][st]] configuration.
 * Customization
 
 - Font size increased
-- Additional =mk= files to allow building transparently on both Linux and BSD (OpenBSD and FreeBSD).
+- Additional =mk= files to allow building transparently on both Linux and BSD (NetBSD, OpenBSD and FreeBSD).
 
 * Requirements
 
