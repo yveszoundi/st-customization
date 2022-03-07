@@ -1,6 +1,6 @@
 #+TITLE: ST terminal customizations
 
-This is my [[https://st.suckless.org/][st]] configuration.
+This is my [[https://st.suckless.org/][st]] configuration with /no manual editing required for builds on BSD platforms/.
 
 * Customization
 
