@@ -1,4 +1,4 @@
-#+TITLE: ST terminal customizations
+#+TITLE: ST terminal customization
 
 This is my [[https://st.suckless.org/][st]] configuration with /no manual editing required for builds on BSD platforms/.
 
