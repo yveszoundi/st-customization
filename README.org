@@ -4,7 +4,8 @@ This is my [[https://st.suckless.org/][st]] configuration with /no manual editin
 
 * Customization
 
-- Font size increased
+- Font size increased and terminal name set to =xterm-256color=
+- [[https://st.suckless.org/patches/xresources/][xresources]] patch
 - Additional =mk= files to allow building transparently on both Linux and BSD (NetBSD, OpenBSD and FreeBSD).
 
 * Requirements
