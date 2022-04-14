@@ -25,3 +25,8 @@ This is my [[https://st.suckless.org/][st]] configuration with /no manual editin
   make && sudo cp st /usr/local/bin
 #+END_SRC
 
+* Screenshot
+
+=st= on Void Linux, compiling some =rust= code.
+
+[[./screenshot.png]]
